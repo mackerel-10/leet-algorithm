@@ -8,26 +8,21 @@ var twoSum = function(numbers, target) {
   // 1 <= index1 < index2 < numbers.length
   // return indices of the two numbers
   let i = 0, j = 1;
-
-  /* if (numbers.length === 0) {
-    return;
-  } */
+  console.log(numbers.length);
 
   while (i < numbers.length - 1) {
-    if (j === numbers.length) {
+    if ((numbers[i] === numbers[j] && numbers[i] + numbers[j] < target)
+      || j === numbers.length) {
       i++;
       j = i + 1;
       continue;
     }
 
-    if (numbers[i] + numbers[j] !== target) {
-      if (numbers[i] === numbers[i + 1]) {
-        i++;
-      } else {
-        j++;
-      }
-    } else {
+    console.log(i, numbers[i], j, numbers[j]);
+    if (numbers[i] + numbers[j] === target) {
       return [i + 1, j + 1];
+    } else {
+      j++;
     }
   }
 };
