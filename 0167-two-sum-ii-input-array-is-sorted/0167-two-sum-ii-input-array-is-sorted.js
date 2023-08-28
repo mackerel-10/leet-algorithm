@@ -17,8 +17,7 @@ var twoSum = function(numbers, target) {
       j = i + 1;
       continue;
     }
-
-    console.log(i, numbers[i], j, numbers[j]);
+    
     if (numbers[i] + numbers[j] === target) {
       return [i + 1, j + 1];
     } else {
