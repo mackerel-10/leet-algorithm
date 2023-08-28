@@ -9,9 +9,9 @@ var twoSum = function(numbers, target) {
   // return indices of the two numbers
   let i = 0, j = 1;
 
-  if (numbers.length === 0) {
+  /* if (numbers.length === 0) {
     return;
-  }
+  } */
 
   while (i < numbers.length - 1) {
     if (j === numbers.length) {
