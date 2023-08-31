@@ -9,7 +9,7 @@ var containsNearbyDuplicate = function(nums, k) {
 
   for (let i = 0; i < nums.length; i++) {
     j = hashTable[nums[i]];
-    if (j >= 0 && Math.abs(i - j) <= k) {
+    if (j !== undefined && i - j <= k) {
       return true;
     }
     hashTable[nums[i]] = i;
