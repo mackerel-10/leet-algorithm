@@ -10,26 +10,24 @@
  * @return {ListNode}
  */
 var sortList = function(head) {
-  let cur, temp;
-  let origin = head;
-
   if (head === null) {
     return head; 
   }
 
-  while (head.next !== null) {
-    cur = head.next;
-    while (cur !== null) {
-      if (head.val > cur.val) {
-        temp = head.val;
-        head.val = cur.val;
-        cur.val = temp;
-      }
-      cur = cur.next;
-    }
-    head = head.next;
+  let pointer = head;
+  let arr = [];
+  while (pointer) {
+    arr.push(pointer.val);
+    pointer = pointer.next;
   }
 
-  console.log("origin", origin);
-  return origin;
+  arr.sort((a, b) => a - b);
+
+  pointer = head;
+  for (let i = 0; i < arr.length; i++) {
+    pointer.val = arr[i];
+    pointer = pointer.next;
+  }
+
+  return head;
 };
