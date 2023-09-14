@@ -6,60 +6,29 @@
  * };
  */
 
-/*
+/**
  * @param {Node} node
  * @return {Node}
  */
 var cloneGraph = function(node) {
-  let stack = [];
-  let visited = new Map();
-  let clone = new Map();
-
-  if (!node) {
-    return null;
-  }
-  if (!node.neighbors.length) {
-    return {val: node.val, neighbors: []};
-  }
-
-  // DFS
-  stack.push(node);
-
-  while (stack.length) {
-    let current = stack.pop();
-
-    if (!visited.has(current)) {
-      let list = [];
-      let cloneVertex;
-
-      for (let i = 0; i < current.neighbors.length; i++) {
-        stack.push(current.neighbors[i]);
-        list.push(current.neighbors[i].val);
-      }
-      cloneVertex = {val: current.val, neighbors: list};
-      visited.set(current, true);
-      if (!clone.has(cloneVertex)) {
-        clone.set(current.val, cloneVertex);
-      }
-    }
-  }
-
-  let iter = clone.values();
-  let flag = false;
-  while (true) {
-    let vertex = iter.next().value;
-    if (!flag) {
-      node = vertex;
-      flag = true;
-    }
-    if (!vertex) break;
-    // console.log(vertex);
-    for (let i in vertex.neighbors) {
-      vertex.neighbors[i] = clone.get(vertex.neighbors[i]);
-    }
-    clone.set(vertex.val, vertex);
-    // console.log(clone.get(vertex.val));
-  }
-
-  return node;
+    if(node == null) return node;
+    const visited = new Map();
+    return cloneHelper(node,visited);
 };
+
+var cloneHelper = function(node,visited){
+    const newNode =new Node(node.val);
+    visited.set(node.val, newNode);
+
+    for(const neighbor of node.neighbors){
+        if(!visited.has(neighbor.val)){
+            const newNeighbor = cloneHelper(neighbor,visited);
+            newNode.neighbors.push(newNeighbor);
+        }
+        else{
+            const newNeighbor = visited.get(neighbor.val);
+            newNode.neighbors.push(newNeighbor);
+        }
+    }
+    return newNode;
+}
